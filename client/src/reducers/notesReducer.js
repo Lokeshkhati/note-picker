@@ -5,7 +5,11 @@ export const notesReducer = (state, action) => {
         case "CREATE_NOTE":
             return {
                 ...state,
-                notes: [...state.notes, { id: Math.random() * 100, title: payload.title, description: payload.description, createdOn: new Date(), label: "", bgColor: "" }]
+                notes: [...state.notes, { id: Math.random() * 100, title: payload.title, description: payload.description, createdOn: new Date().toLocaleDateString(), label: "", bgColor: "" }]
+            }
+        case "EDIT_NOTE":
+            return {
+                ...state,
             }
         case "DELETE_NOTE":
             return {
@@ -74,6 +78,7 @@ export const notesReducer = (state, action) => {
         case "SET_NOTE_SEARCH":
             return {
                 ...state,
+                notes: payload.filteredNotes
             }
         case "SET_NOTE_TO_PIN":
             return {

@@ -67,7 +67,7 @@ const Note = (note) => {
       className={` ${
         theme === "light"
           ? " bg-white text-slate-800 "
-          : "  bg-gray-800 text-white"
+          : "  bg-gray-800 text-gray-200"
       }   rounded mt-4 p-4`}
     >
       <div className="flex justify-between items-center">
@@ -87,7 +87,11 @@ const Note = (note) => {
       <Chips text={label} />
 
       <div className="flex flex-wrap gap-2 mt-4 justify-between  items-center">
-        <p className=" text-[#9A9A9A] tracking-wide ">
+        <p
+          className={` ${
+            theme === "light" ? "  text-slate-800 " : "   text-white"
+          } tracking-wide `}
+        >
           {`Created on ${createdOn.toString()}`}
         </p>
         <div className="flex gap-6 ">
@@ -169,7 +173,7 @@ const Note = (note) => {
         </div>
       </div>
       <Modal showModal={show} setShowModal={setShow}>
-        <div className="w-[30rem] ">
+        <div className="w-80  sm:w-[30rem] ">
           <NoteForm
             title={editTtitle}
             setTitle={setEditTitle}

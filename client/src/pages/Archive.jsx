@@ -21,12 +21,7 @@ const Archive = () => {
         {numberOfNotes > 0 ? (
           <div>
             <Searchbar />
-            <div className=" my-6 flex items-center justify-between">
-              <h1 className="font-semibold mt-2">ARCHIVED</h1>
-              <button onClick={() => addAllNotesToTrash()}>
-                <BsTrash size="18" />
-              </button>
-            </div>
+            <h1 className="font-semibold mt-6">ARCHIVED</h1>
             <NotesList notes={archive} />
           </div>
         ) : (

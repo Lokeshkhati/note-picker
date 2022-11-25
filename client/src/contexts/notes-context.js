@@ -12,22 +12,22 @@ const initialState = {
     title: 'Learn to Code',
     description: "Learn to Code Learn to Code Learn to Code  Learn to Code Learn to Code",
     bgColor: "",
-    label: "",
-    createdOn: new Date(),
+    label: "Code",
+    createdOn: new Date().toLocaleDateString(),
   }, {
     id: Math.random() * 100,
     title: 'Learn to Cook',
     description: "Learn to Cook Learn to Cook Learn to Cook  Learn to Cook Learn to Cook",
     bgColor: "",
-    label: "",
-    createdOn: new Date(),
+    label: "Cook",
+    createdOn: new Date().toLocaleDateString(),
   }, {
     id: Math.random() * 100,
     title: 'Learn to Fuck',
     description: "Learn to Fuck Learn to Fuck Learn to Fuck  Learn to Fuck Learn to Fuck",
     bgColor: "",
-    label: "",
-    createdOn: new Date(),
+    label: "Fuck",
+    createdOn: new Date().toLocaleDateString(),
   }],
   archive: [],
   labels: [],
@@ -100,14 +100,16 @@ const NotesProvider = ({ children }) => {
     dispatch({ type: "SET_NOTE_TO_UNPIN", payload: note })
   }
   const createLabel = (note, text) => {
-   
+
     dispatch({ type: "CREATE_NOTE_LABEL", payload: { note, text } })
   }
   const searchNotes = (searchTerm) => {
+    console.log(searchTerm)
     const filteredNotes = state.notes.filter((note) => {
       return note.title.toLowerCase().includes(searchTerm)
     }
     );
+    console.log(filteredNotes)
     dispatch({ type: "SET_NOTE_SEARCH", payload: { filteredNotes } })
   }
 

@@ -12,7 +12,7 @@ const Searchbar = () => {
 
   const handleChange = (event) => {
     setQuery(event.target.value);
-    searchNotes(query)
+    searchNotes(query);
   };
   return (
     <>
@@ -24,7 +24,7 @@ const Searchbar = () => {
         }  flex items-center px-4 w-full   rounded h-11`}
       >
         <button onClick={() => searchNotes(query)}>
-          <AiOutlineSearch color="black" size="25" />
+          <AiOutlineSearch color="#9A9A9A" size="25" />
         </button>
         <input
           value={query}
@@ -59,7 +59,7 @@ const Searchbar = () => {
       </div>
 
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className="w-[400px]">
+        <div className=" w-80 sm:w-96 ">
           <FilterNotes />
         </div>
       </Modal>

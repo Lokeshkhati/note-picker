@@ -7,8 +7,8 @@ const FilterNotes = () => {
       className={` ${
         theme === "light"
           ? " bg-white text-slate-800 "
-          : "  bg-[#1e2936] text-white"
-      }   text-gray-900 p-6`}
+          : "  bg-gray-900 text-white"
+      }    p-6`}
     >
       <div className="border-b-2 py-2 border-gray-400">
         <h1 className="text-xl font-semibold">Filter & Sort Notes</h1>
@@ -16,7 +16,11 @@ const FilterNotes = () => {
       <div className=" my-4">
         <h1 className="text-md font-semibold"> Sort By date</h1>
         <select
-          className="border-2 rounded-sm w-full border-gray-400 outline-none mt-2 h-10 py-.5 px-2"
+          className={` ${
+            theme === "light"
+              ? " bg-gray-100 text-slate-800 "
+              : "  bg-gray-800 text-white"
+          }    p-6border-2 rounded-sm w-full  border-gray-400 outline-none mt-2 h-10 py-.5 px-2`}
           name="Sort By date"
         >
           <option value="Newest First">Newest First</option>
@@ -27,8 +31,12 @@ const FilterNotes = () => {
         <h1 className="text-md font-semibold"> Sort By Priority</h1>
 
         <select
-          className="border-2 rounded-sm w-full border-gray-400 outline-none mt-2 h-10 py-.5 px-2"
-          name="Sort By date"
+          className={` ${
+            theme === "light"
+              ? " bg-gray-100 text-slate-800 "
+              : "  bg-gray-800 text-white"
+          }    p-6border-2 rounded-sm w-full  border-gray-400 outline-none mt-2 h-10 py-.5 px-2`}
+          name="Sort priority"
         >
           {/* <option disabled>Coose</option> */}
           <option value="Newest First">High to Low</option>

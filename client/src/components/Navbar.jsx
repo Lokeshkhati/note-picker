@@ -10,7 +10,7 @@ const Navbar = ({ setIsOpen }) => {
 
   return (
     <nav
-      className={ ` z-40 sticky top-0 flex justify-center items-center h-14  ${
+      className={` z-40 sticky top-0 flex justify-center items-center h-14  ${
         theme === "light"
           ? " bg-white text-slate-800 "
           : "  bg-gray-800 text-white"
@@ -37,6 +37,7 @@ const Navbar = ({ setIsOpen }) => {
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
+                color={`${theme === "light" ? "black " : "white"}`}
               ></path>
             </svg>
           </button>

@@ -1,5 +1,6 @@
 import { useNotes } from "../contexts/notes-context";
 import { useState } from "react";
+import { useTheme } from "../contexts/theme-context";
 
 const NoteForm = ({
   title,
@@ -9,15 +10,23 @@ const NoteForm = ({
   buttonText,
 }) => {
   const { createNote } = useNotes();
-
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
+  const { theme } = useTheme();
 
   return (
-    <div className="flex overflow-hidden  p-4 flex-col ">
+    <div
+      className={` ${
+        theme === "light"
+          ? " bg-white text-slate-800 "
+          : "  bg-gray-900 text-white"
+      } flex overflow-hidden  p-4 flex-col`}
+    >
       <input
         value={title}
-        className=" text-black border border-gray-300   outline-none rounded pl-2 my-4 h-9 sm:h-11 text-lg sm:text-xl font-semibold w-full "
+        className={` ${
+          theme === "light"
+            ? " bg-white text-slate-800 "
+            : "  bg-gray-900 text-white"
+        } border   outline-none rounded pl-2 my-4 h-9 sm:h-11 text-lg sm:text-xl font-semibold w-full `}
         placeholder="Note Title . . ."
         type="text"
         autoFocus={true}
@@ -28,12 +37,20 @@ const NoteForm = ({
         value={description}
         onChange={(event) => setDescription(event.target.value)}
         placeholder="start writting . . . "
-        className=" text-black border border-gray-300   outline-none rounded pl-2   min-h-[150px]  text-lg sm:text-xl  "
+        className={` ${
+          theme === "light"
+            ? " bg-white text-slate-800 "
+            : "  bg-gray-900 text-white"
+        } border  outline-none rounded pl-2  min-h-[90px] sm:min-h-[150px]  text-lg sm:text-xl  `}
       />
 
       <div className=" my-2">
         <select
-          className="border-2 rounded-sm w-32 border-gray-400 outline-none mt-2 h-10 py-.5 px-2"
+          className={` ${
+            theme === "light"
+              ? " bg-white text-slate-800 "
+              : "  bg-gray-900 text-white"
+          } border rounded w-32 border-gray-300 outline-none mt-2 h-10 py-.5 px-2`}
           name="Sort By date"
         >
           <option value="Newest First">Low</option>
