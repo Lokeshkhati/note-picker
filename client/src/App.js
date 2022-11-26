@@ -10,23 +10,47 @@ import Archive from "./pages/Archive";
 import Trash from "./pages/Trash";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RequiresAuth from "./components/RequiresAuth";
 function App() {
   const { theme } = useTheme();
   return (
     <div
-      className={`h-full relative ${
-        theme === "light"
-          ? " bg-[#E5E5E5] text-gray-900 "
-          : "bg-gray-900 text-white"
-      } `}
+      className={`h-full relative ${theme === "light"
+        ? " bg-[#E5E5E5] text-gray-900 "
+        : "bg-gray-900 text-white"
+        } `}
     >
+      <ToastContainer />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="labels" element={<Labels />} />
-          <Route path="archive" element={<Archive />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="trash" element={<Trash />} />
+        <Route path="/" element={<Layout />
+        }>
+          <Route index element={
+            <RequiresAuth>
+              <Home />
+            </RequiresAuth>} />
+          <Route path="labels" element={
+            <RequiresAuth>
+              <Labels />
+            </RequiresAuth>
+          } />
+          <Route path="archive" element={
+            <RequiresAuth>
+              <Archive />
+            </RequiresAuth>
+          } />
+          <Route path="profile" element={
+            <RequiresAuth>
+              <Profile />
+            </RequiresAuth>
+          } />
+          <Route path="trash" element={
+            <RequiresAuth>
+              <Trash />
+            </RequiresAuth>
+          } />
         </Route>
         <Route path="landing-page" element={<Landing />} />
         <Route path="login" element={<Login />} />

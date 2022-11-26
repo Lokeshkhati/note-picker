@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/theme-context";
 import { useState } from "react";
+import axios from "axios";
 
-import { useAuth } from "../contexts/auth-context";
 
 const Register = () => {
   const { theme } = useTheme();
@@ -26,12 +26,31 @@ const Register = () => {
       };
     });
   };
-  
-  const handleRegister = (event) => {
-    event.preventDefault();
-    console.log(formData);
 
-    
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    const userData = {
+      fullname,
+      username,
+      email,
+      password,
+    };
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/v1/register",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      navigate("/login", { replace: true });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

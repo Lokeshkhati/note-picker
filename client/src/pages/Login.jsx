@@ -1,17 +1,50 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useLocalStorage from "../hooks/useLocalStorage";
 import { useTheme } from "../contexts/theme-context";
 import { useState } from "react";
+import axios from "axios";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../contexts/auth-context";
 
 const Login = () => {
-  const { theme } = useTheme();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { theme } = useTheme();
+  const { setUser } = useAuth();
+
   // let from = location.state?.from?.pathname || "/";
-  const handleLogin = (event) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(email,password)
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/v1/login",
+        { email, password },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      toast.success("LogIn Successfull", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      const { user, token } = data;
+      const { fullname, username } = user;
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+      setUser({ fullname, username });
+      console.log(fullname, username);
+      navigate("/", { replace: true });
+    } catch (error) {
+      toast.error(error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   return (

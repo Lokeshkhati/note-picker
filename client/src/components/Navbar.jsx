@@ -1,13 +1,16 @@
 import { useTheme } from "../contexts/theme-context";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
+import { useAuth } from "../contexts/auth-context";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { useNotes } from "../contexts/notes-context";
 // import { useState } from "react";
 
 const Navbar = ({ setIsOpen }) => {
   const { theme, setTheme } = useTheme();
+  const { user } = useAuth();
 
+  console.log(user)
   return (
     <nav
       className={` z-40 sticky top-0 flex justify-center items-center h-14  ${
@@ -53,9 +56,11 @@ const Navbar = ({ setIsOpen }) => {
         </div>
 
         <div className="flex items-center">
-          {/* <h1 className=" hidden sm:block mr-10 text-lg font-bold text-indigo-500">
-           {`Hi ${user.email} ${user.lastName}`}
-          </h1> */}
+          {user.fullname && (
+            <h1 className=" hidden sm:block mr-10 text-lg font-bold text-indigo-500">
+              Hi {user.fullname}
+            </h1>
+          )}
           <button
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
