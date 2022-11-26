@@ -85,6 +85,7 @@ const Note = (note) => {
 
       <p className="md:text-lg">{description}</p>
       <Chips text={label} />
+      <div className="text-rose-600   py-1 px-4 w-32">Low level</div>
 
       <div className="flex flex-wrap gap-2 mt-4 justify-between  items-center">
         <p

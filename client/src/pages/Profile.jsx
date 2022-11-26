@@ -3,7 +3,7 @@ import { useNotes } from "../contexts/notes-context";
 import { useTheme } from "../contexts/theme-context";
 
 const Profile = () => {
-  const { notes, archive, trash } = useNotes();
+  const { notes, archive, trash,pinnedNotes } = useNotes();
   const { theme } = useTheme();
   return (
     <div
@@ -16,11 +16,11 @@ const Profile = () => {
       <div className=" flex flex-col items-center justify-center space-x-7 ">
         {/* <div className=" flex justify-center items-center bg-gray-500 h-32 w-32 rounded-full"> */}
         {/* </div> */}
-        <img
+        {/* <img
           className=" w-32 rounded-full"
           src="https://avatars.githubusercontent.com/u/5550850?v=4"
           alt="brad"
-        />
+        /> */}
         <div>
           <h1 className="  text-2xl font-bold my-2">
             Welcome! Lokesh khati
@@ -28,14 +28,19 @@ const Profile = () => {
           </h1>
           
           <div className="flex justify-center gap-2 sm:gap-6 ">
-            <button className="text-lg font-semi-bold mt-6 py-1.5 px-6 rounded border border-indigo-500 ">
+            {/* <button className="text-lg font-semi-bold mt-6 py-1.5 px-6 rounded border border-indigo-500 ">
               Logout
-            </button>
+            </button> */}
             {/* <button className="text-lg font-semi-bold mt-6 py-1.5 px-2 rounded border bg-indigo-500 text-white border-indigo-500 ">
               Edit Profile
             </button> */}
           </div>
         </div>
+        <q  className="bg-slate-800 text-white rounded font-semibold p-4 text-xl tracking-wide mb-6 md:max-w-lg">
+            Full stack web developer and online instructor, specializiing in
+            mostly JS, but also write Python, PHP and some other stuff.
+
+          </q>
       </div>
       <div className="mt-8 flex flex-wrap gap-4 justify-center items-center sm:space-x-4">
         <div className="bg-slate-800 w-54 py-2 px-6 rounded ">
@@ -53,11 +58,12 @@ const Profile = () => {
             Notes in Trash {trash?.length}
           </h2>
         </div>
-        <q className="font-semibold p-4 text-xl tracking-wide mb-6 md:max-w-lg">
-            Full stack web developer and online instructor, specializiing in
-            mostly JS, but also write Python, PHP and some other stuff.
-
-          </q>
+        <div className="bg-slate-800  w-54 py-2 px-6 rounded ">
+          <h2 className="text-white text-lg ">
+            Pinned notes {pinnedNotes?.length}
+          </h2>
+        </div>
+        
       </div>
       
       {/* <Modal showModal={showModal} setShowModal={setShowModal}>

@@ -31,8 +31,8 @@ const Labels = () => {
                 </button>
               </div>
             </>
-            <NotesList notes={labels} />
-            {/* {labels?.map((note) => (
+            {/* <NotesList notes={labels} /> */}
+            {labels?.map((note) => (
               <>
                 <div
                   key={note.id}
@@ -45,7 +45,7 @@ const Labels = () => {
                 </div>
                 <Note {...note} />
               </>
-            ))} */}
+            ))}
           </div>
         ) : (
           <h1 className="text-lg  text-center font-bold">
