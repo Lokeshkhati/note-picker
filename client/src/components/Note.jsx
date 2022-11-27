@@ -19,7 +19,7 @@ import { useTheme } from "../contexts/theme-context";
 import Modal from "./Modal";
 
 const Note = (note) => {
-  const { id, title, description, createdOn, bgColor, label } = note;
+  const { id, title, description, createdAt, bgColor, label } = note;
   const [showColorPalette, setShowColorPalette] = useState(false);
   const [labelText, setLabelText] = useState(label);
   const [editTtitle, setEditTitle] = useState(title);
@@ -93,7 +93,7 @@ const Note = (note) => {
             theme === "light" ? "  text-slate-800 " : "   text-white"
           } tracking-wide `}
         >
-          {`Created on ${createdOn.toString()}`}
+          {`Created on ${new Date(createdAt).toLocaleDateString()}`}
         </p>
         <div className="flex gap-6 ">
           <div className="relative" ref={ref}>

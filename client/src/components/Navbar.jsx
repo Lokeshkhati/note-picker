@@ -2,15 +2,10 @@ import { useTheme } from "../contexts/theme-context";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import { useAuth } from "../contexts/auth-context";
-// import { AiOutlineMenu } from "react-icons/ai";
-// import { useNotes } from "../contexts/notes-context";
-// import { useState } from "react";
 
 const Navbar = ({ setIsOpen }) => {
   const { theme, setTheme } = useTheme();
   const { user } = useAuth();
-
-  console.log(user)
   return (
     <nav
       className={` z-40 sticky top-0 flex justify-center items-center h-14  ${
@@ -21,14 +16,6 @@ const Navbar = ({ setIsOpen }) => {
     >
       <div className="flex justify-between max-w-7xl  w-full ">
         <div className="flex gap-6 justify-center items-center">
-          {/* <div
-            onClick={toggle}
-            className={`flex md:hidden rounded-full h-9 w-9 cursor-pointer justify-center items-center ${
-              theme === "light" ? "hover:bg-gray-300" : "hover:bg-gray-700"
-            }`}
-          >
-            <AiOutlineMenu size="25" />
-          </div> */}
           <button
             className="lg:hidden  text-black"
             onClick={() => setIsOpen(true)}

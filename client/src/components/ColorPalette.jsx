@@ -3,7 +3,6 @@ import { colors } from "../utils/colors";
 
 const ColorPalette = ({ noteId }) => {
   const { noteBgColor } = useNotes();
-  console.log(noteId);
   return (
     <div className="absolute right-0 top-0  sm:w-72  flex flex-wrap justify-center items-center bg-white gap-2 sm:gap-4 p-2  shadow-md rounded">
       {colors.map(({ id, color }) => (

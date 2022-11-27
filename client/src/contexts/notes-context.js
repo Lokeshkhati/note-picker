@@ -5,37 +5,18 @@ import {
   useEffect,
 } from "react";
 import { notesReducer } from "../reducers/notesReducer";
-// import axios from 'axios';
+import axios from 'axios';
 const initialState = {
-  notes: [{
-    id: Math.random() * 100,
-    title: 'Learn to Code',
-    description: "Learn to Code Learn to Code Learn to Code  Learn to Code Learn to Code",
-    bgColor: "",
-    label: "Code",
-    createdOn: new Date().toLocaleDateString(),
-  }, {
-    id: Math.random() * 100,
-    title: 'Learn to Cook',
-    description: "Learn to Cook Learn to Cook Learn to Cook  Learn to Cook Learn to Cook",
-    bgColor: "",
-    label: "Cook",
-    createdOn: new Date().toLocaleDateString(),
-  }, {
-    id: Math.random() * 100,
-    title: 'Learn to Fuck',
-    description: "Learn to Fuck Learn to Fuck Learn to Fuck  Learn to Fuck Learn to Fuck",
-    bgColor: "",
-    label: "Fuck",
-    createdOn: new Date().toLocaleDateString(),
-  }],
+  notes: [],
   archive: [],
   labels: [],
   trash: [],
   pinnedNotes: [],
   isLoading: false,
-  isEditing: false
+  isEditing: false,
+  error: ''
 };
+
 
 const storedValues = (initialState) =>
   JSON.parse(localStorage.getItem("state")) || initialState;
@@ -47,27 +28,48 @@ const useNotes = () => useContext(NotesContext);
 const NotesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notesReducer, initialState, storedValues);
 
-  // const getNotes = async () => {
-  //   try {
-  //     const data = await axios.get('http://localhost:8000/api/v1/')
-  //     console.log(data)
+  const getNotes = async (token) => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/v1/', {
+        headers: { Authorization: token }
+      })
 
-  //     // dispatch({ type: "SET_NOTES", payload: data })
-  //   } catch (error) {
+      dispatch({ type: "FETCH_NOTES_SUCCESS", payload: response.data.notes })
+    } catch (error) {
+      dispatch({ type: "FETCH_NOTES_SUCCESS", })
+    }
+  }
 
-  //     console.log(error)
-  //   }
-  // }
-  // useEffect(() => {
-  //   getNotes()
-  // })
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      getNotes(token)
+    }
+  }, [])
+
   useEffect(() => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
 
-  const createNote = (title, description) => {
-    dispatch({ type: "CREATE_NOTE", payload: { title, description } })
-    console.log(title, description)
+  // const createNote = (title, description) => {
+  //   dispatch({ type: "CREATE_NOTE", payload: { title, description } })
+  //   console.log(title, description)
+  // }
+
+  const createNote = async (title, description) => {
+    try {
+
+      const token = localStorage.getItem("token")
+      if (token) {
+        const newNote = { title, description }
+        await axios.post("http://localhost:8000/api/v1/create", newNote, {
+          headers: { Authorization: token }
+        })
+        dispatch({ type: "CREATE_NOTE", payload: { title, description } })
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const deleteNoteForever = (id) => {

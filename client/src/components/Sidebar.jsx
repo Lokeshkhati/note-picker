@@ -12,6 +12,14 @@ import { useToggle } from "../hooks/useToggle";
 const Sidebar = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  // const [note, setNote] = useState({
+  //   id: "",
+  //   title: "",
+  //   description: "",
+  //   label: "",
+  //   bgColor: "",
+  //   createdOn: new Date().toLocaleDateString(),
+  // });
   const { theme } = useTheme();
   const navigate = useNavigate();
 
