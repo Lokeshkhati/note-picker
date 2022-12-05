@@ -41,7 +41,7 @@ const Login = () => {
       console.log(fullname, username);
       navigate("/", { replace: true });
     } catch (error) {
-      toast.error(error.response.data.error, {
+      toast.error(error.response?.data.error, {
         position: toast.POSITION.TOP_RIGHT,
       });
     }

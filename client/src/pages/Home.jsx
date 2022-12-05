@@ -3,13 +3,14 @@ import { useTheme } from "../contexts/theme-context";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import Searchbar from "../components/Searchbar";
 import NotesList from "../components/NotesList";
+import Note from "../components/Note";
 import { useNotes } from "../contexts/notes-context";
 
 const Home = () => {
   const { theme } = useTheme();
   const { notes, pinnedNotes } = useNotes();
   const setDocumentTitle = useDocumentTitle();
- 
+
   useEffect(() => {
     setDocumentTitle(" Note-Picker | Home");
   }, []);
@@ -39,6 +40,9 @@ const Home = () => {
                   <h1 className="font-semibold my-2">OTHERS</h1>
                 )}
                 <NotesList notes={notes} />
+                {/* {notes.map((note) => (
+                  <Note {...note} />
+                ))} */}
               </>
             )}
           </>

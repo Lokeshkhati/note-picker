@@ -7,7 +7,7 @@ const Modal = ({ showModal, setShowModal, children }) => {
     <div className=" z-40  fixed inset-0 flex justify-center items-center">
       <div
         onClick={() => setShowModal(false)}
-        class="fixed inset-0 backdrop-blur-sm bg-black/20"
+        class="fixed inset-0  bg-black/40"
       ></div>
       <div className="relative">
         <button

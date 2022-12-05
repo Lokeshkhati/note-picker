@@ -28,28 +28,28 @@ function App() {
         <Route path="/" element={<Layout />
         }>
           <Route index element={
-            <RequiresAuth>
-              <Home />
-            </RequiresAuth>} />
+
+            <Home />
+          } />
           <Route path="labels" element={
-            <RequiresAuth>
-              <Labels />
-            </RequiresAuth>
+
+            <Labels />
+
           } />
           <Route path="archive" element={
-            <RequiresAuth>
-              <Archive />
-            </RequiresAuth>
+
+            <Archive />
+
           } />
           <Route path="profile" element={
-            <RequiresAuth>
-              <Profile />
-            </RequiresAuth>
+
+            <Profile />
+
           } />
           <Route path="trash" element={
-            <RequiresAuth>
-              <Trash />
-            </RequiresAuth>
+
+            <Trash />
+
           } />
         </Route>
         <Route path="landing-page" element={<Landing />} />
