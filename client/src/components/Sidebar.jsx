@@ -2,24 +2,22 @@ import { useTheme } from "../contexts/theme-context";
 import Logout from "./Logout";
 import { useNavigate } from "react-router-dom";
 import SidebarData from "./SidebarData";
-import { useState, useRef } from "react";
-import useClickOutside from "../hooks/useClickOutside";
+import { useState } from "react";
 
 import Modal from "./Modal";
 import NoteForm from "./NoteForm";
 import { useToggle } from "../hooks/useToggle";
 
 const Sidebar = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  // const [note, setNote] = useState({
-  //   id: "",
-  //   title: "",
-  //   description: "",
-  //   label: "",
-  //   bgColor: "",
-  //   createdOn: new Date().toLocaleDateString(),
-  // });
+  const [note, setNote] = useState({
+    id: Math.random() * 100 * new Date(),
+    title: "",
+    description: "",
+    label: "",
+    bgColor: "",
+    createdOn: new Date().toLocaleDateString(),
+    isPinned: false,
+  });
   const { theme } = useTheme();
   const navigate = useNavigate();
 
@@ -58,13 +56,7 @@ const Sidebar = () => {
       </aside>
       <Modal showModal={show} setShowModal={setShow}>
         <div className="w-[30rem] ">
-          <NoteForm
-            title={title}
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-            buttonText="Create Note"
-          />
+          <NoteForm note={note} setNote={setNote} buttonText="Create Note" />
         </div>
       </Modal>
     </>

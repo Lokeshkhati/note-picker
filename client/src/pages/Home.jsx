@@ -15,8 +15,6 @@ const Home = () => {
     setDocumentTitle(" Note-Picker | Home");
   }, []);
 
-  console.log(notes);
-
   const pinnedNotes = notes.filter((note) => note.isPinned);
   const unPinnedNotes = notes.filter((note) => !note.isPinned);
 

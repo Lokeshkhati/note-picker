@@ -2,15 +2,14 @@ import { useNotes } from "../contexts/notes-context";
 import { useState } from "react";
 import { useTheme } from "../contexts/theme-context";
 
-const NoteForm = ({
-  title,
-  setTitle,
-  description,
-  setDescription,
-  buttonText,
-}) => {
+const NoteForm = ({ note, setNote, buttonText }) => {
   const { createNote } = useNotes();
   const { theme } = useTheme();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNote({ [name]: value });
+  };
 
   return (
     <div
@@ -21,7 +20,7 @@ const NoteForm = ({
       } flex overflow-hidden  p-4 flex-col`}
     >
       <input
-        value={title}
+        value={note.title}
         className={` ${
           theme === "light"
             ? " bg-white text-slate-800 "
@@ -30,13 +29,13 @@ const NoteForm = ({
         placeholder="Note Title . . ."
         type="text"
         autoFocus={true}
-        onChange={(event) => setTitle(event?.target.value)}
+        onChange={handleChange}
       />
       <textarea
         name="description"
-        value={description}
-        onChange={(event) => setDescription(event.target.value)}
-        placeholder="start writting . . . "
+        value={note.description}
+        onChange={handleChange}
+        placeholder="start writing . . . "
         className={` ${
           theme === "light"
             ? " bg-white text-slate-800  "
@@ -68,7 +67,7 @@ const NoteForm = ({
           Cancel
         </button>
         <button
-          onClick={() => createNote(title, description)}
+          onClick={() => createNote(note)}
           className="text-lg font-semibold py-1 px-4 text-white  bg-indigo-600 hover:bg-indigo-500 "
         >
           {buttonText}

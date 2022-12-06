@@ -30,8 +30,8 @@ const NotesProvider = ({ children }) => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
 
-  const createNote = (title, description) => {
-    dispatch({ type: "CREATE", payload: { title, description } })
+  const createNote = (note) => {
+    dispatch({ type: "CREATE", payload: note })
   }
 
   const deleteNoteForever = (id) => {

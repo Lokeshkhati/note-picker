@@ -19,7 +19,7 @@ import { useTheme } from "../contexts/theme-context";
 import Modal from "./Modal";
 
 const Note = (note) => {
-  const { id, title, description, createdAt, bgColor, label, isPinned } = note;
+  const { id, title, description, createdOn, bgColor, label, isPinned } = note;
   const [showColorPalette, setShowColorPalette] = useState(false);
   const [labelText, setLabelText] = useState(label);
   const [editTitle, setEditTitle] = useState(title);
@@ -50,9 +50,6 @@ const Note = (note) => {
   const notesInTrash = trash?.find((note) => note.id === id);
   const isInTrash = notesInTrash ? true : false;
 
-  // const notesInPin = pinnedNotes?.find((note) => note.id === id);
-  // const isPinned = notesInPin ? true : false;
-
   useClickOutside(ref, () => setShowColorPalette(false));
 
   const handleSubmit = (event) => {
@@ -72,16 +69,6 @@ const Note = (note) => {
     >
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold mb-2">{title}</h1>
-        {/* {isPinned ? (
-          <button onClick={() => unPinNote(note)}>
-            <BsFillPinFill size="18" />
-          </button>
-        ) : (
-          <button onClick={() => pinNote(note)}>
-            <BsPin size="18" />
-          </button>
-        )} */}
-
         <button onClick={() => pinNote(id)}>
           {isPinned ? <BsFillPinFill size="18" /> : <BsPin size="18" />}
         </button>
@@ -97,7 +84,7 @@ const Note = (note) => {
             theme === "light" ? "  text-slate-800 " : "   text-white"
           } tracking-wide `}
         >
-          {`Created on ${new Date(createdAt).toLocaleDateString()}`}
+          {`Created on ${new Date(createdOn).toLocaleDateString()}`}
         </p>
         <div className="flex gap-6 ">
           <div className="relative" ref={ref}>
@@ -193,3 +180,4 @@ const Note = (note) => {
 };
 
 export default Note;
+

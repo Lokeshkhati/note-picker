@@ -4,7 +4,7 @@ export const notesReducer = (state, action) => {
         case "CREATE":
             return {
                 ...state,
-                notes: [...state.notes, { id: Math.random() * 100, title: payload.title, description: payload.description, createdOn: new Date().toLocaleDateString(), label: "", bgColor: "", isPinned: false }]
+                notes: [...state.notes, payload]
             }
         case "EDIT":
             return {
@@ -22,8 +22,6 @@ export const notesReducer = (state, action) => {
             return {
                 ...state,
                 archive: state.archive?.filter((note) => note.id !== payload.id),
-                // trash: state.trash.filter((note) => note.id !== payload.id),
-                // labels: state.labels?.filter((note) => note.id !== payload.id),
                 notes: [...state.notes, payload],
             }
 
@@ -86,8 +84,6 @@ export const notesReducer = (state, action) => {
                     }
                     return note;
                 }),
-
-                // labels: [...state.labels, payload.note]
             }
 
         default:
