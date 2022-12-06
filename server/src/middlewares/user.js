@@ -5,9 +5,7 @@ import { CustomError } from '../utils/customError.js'
 const isLoggedIn = async (req, res, next) => {
 
   try {
-    // const token = req.cookies.token || req.headers['x-access-token'] || req.header("Authorization")?.replace("Bearer", "")
-    const token = req.header("Authorization")?.replace("Bearer", "")
-    // const token = req.header("Authorization")
+    const token = req.cookies.token
 
     if (!token) {
       return next(new CustomError("Login first to access this page", 400))

@@ -6,20 +6,18 @@ import crypto from 'crypto'
 
 const register = async (req, res, next) => {
     try {
-        const { fullName, username, email, password, confirmPassword } = req.body
+        const { fullName, username, email, password, } = req.body
 
-        if (!email || !fullName || !username || !password || !confirmPassword) {
+        if (!email || !fullName || !username || !password ) {
             return next(new CustomError('Please provide all fields', 400))
         }
-        if (password !== confirmPassword) {
-            return next(new CustomError("Password and Confirm password do not match"))
-        }
+        
         const UserExists = await User.findOne({ email })
         if (UserExists) {
             return next(new CustomError("User with given email already exists"))
         }
 
-        const user = new User({
+        const user = User.create({
             fullName,
             username,
             email,
