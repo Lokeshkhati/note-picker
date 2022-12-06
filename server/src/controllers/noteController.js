@@ -88,6 +88,7 @@ const deleteNote = async (req, res, next) => {
         if (!note) {
             return next(new CustomError('Note not found', 400))
         }
+        await note.save()
         res.json({ success: true, message: "Deleted a note" })
     } catch (error) {
         return next(new CustomError(error, 500))
