@@ -19,10 +19,10 @@ import { useTheme } from "../contexts/theme-context";
 import Modal from "./Modal";
 
 const Note = (note) => {
-  const { id, title, description, createdAt, bgColor, label } = note;
+  const { id, title, description, createdAt, bgColor, label, isPinned } = note;
   const [showColorPalette, setShowColorPalette] = useState(false);
   const [labelText, setLabelText] = useState(label);
-  const [editTtitle, setEditTitle] = useState(title);
+  const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const [isOpen, setIsOpen] = useToggle();
   const {
@@ -50,8 +50,8 @@ const Note = (note) => {
   const notesInTrash = trash?.find((note) => note.id === id);
   const isInTrash = notesInTrash ? true : false;
 
-  const notesInPin = pinnedNotes?.find((note) => note.id === id);
-  const isPinned = notesInPin ? true : false;
+  // const notesInPin = pinnedNotes?.find((note) => note.id === id);
+  // const isPinned = notesInPin ? true : false;
 
   useClickOutside(ref, () => setShowColorPalette(false));
 
@@ -72,7 +72,7 @@ const Note = (note) => {
     >
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold mb-2">{title}</h1>
-        {isPinned ? (
+        {/* {isPinned ? (
           <button onClick={() => unPinNote(note)}>
             <BsFillPinFill size="18" />
           </button>
@@ -80,7 +80,11 @@ const Note = (note) => {
           <button onClick={() => pinNote(note)}>
             <BsPin size="18" />
           </button>
-        )}
+        )} */}
+
+        <button onClick={() => pinNote(id)}>
+          {isPinned ? <BsFillPinFill size="18" /> : <BsPin size="18" />}
+        </button>
       </div>
 
       <p className="md:text-lg">{description}</p>
@@ -176,7 +180,7 @@ const Note = (note) => {
       <Modal showModal={show} setShowModal={setShow}>
         <div className="w-80  sm:w-[30rem] ">
           <NoteForm
-            title={editTtitle}
+            title={editTitle}
             setTitle={setEditTitle}
             description={editDescription}
             setDescription={setEditDescription}

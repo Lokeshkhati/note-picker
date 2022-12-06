@@ -8,12 +8,17 @@ import { useNotes } from "../contexts/notes-context";
 
 const Home = () => {
   const { theme } = useTheme();
-  const { notes, pinnedNotes } = useNotes();
+  const { notes } = useNotes();
   const setDocumentTitle = useDocumentTitle();
 
   useEffect(() => {
     setDocumentTitle(" Note-Picker | Home");
   }, []);
+
+  console.log(notes);
+
+  const pinnedNotes = notes.filter((note) => note.isPinned);
+  const unPinnedNotes = notes.filter((note) => !note.isPinned);
 
   const numberOfNotes = notes?.length || pinnedNotes?.length;
   return (
@@ -34,21 +39,18 @@ const Home = () => {
                 <NotesList notes={pinnedNotes} />
               </>
             )}
-            {notes?.length > 0 && (
+            {unPinnedNotes?.length > 0 && (
               <>
                 {pinnedNotes?.length > 0 && (
                   <h1 className="font-semibold my-2">OTHERS</h1>
                 )}
-                <NotesList notes={notes} />
-                {/* {notes.map((note) => (
-                  <Note {...note} />
-                ))} */}
+                <NotesList notes={unPinnedNotes} />
               </>
             )}
           </>
         ) : (
           <h1 className="text-lg  text-center font-bold">
-            Opps! You don't have any notes.
+            Oops! You don't have any notes.
           </h1>
         )}
       </div>

@@ -44,7 +44,9 @@ const NoteForm = ({
         } border   outline-0 rounded pl-2  min-h-[90px] sm:min-h-[150px]  text-lg sm:text-xl  `}
       />
 
-      <div className=" my-2">
+      <div className="flex justify-between items-center my-2">
+        <div>Label</div>
+        <div>Color</div>
         <select
           className={` ${
             theme === "light"
@@ -61,9 +63,9 @@ const NoteForm = ({
       <div className="flex justify-between mt-4">
         <button
           // onClick={() => setShow(false)}
-          className="  mr-6 py-.5 px-4 text-lg font-semibold  "
+          className="border  mr-6 py-.5 px-4 text-lg font-semibold  "
         >
-          Close
+          Cancel
         </button>
         <button
           onClick={() => createNote(title, description)}

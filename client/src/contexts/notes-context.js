@@ -8,9 +8,7 @@ import { notesReducer } from "../reducers/notesReducer";
 const initialState = {
   notes: [],
   archive: [],
-  labels: [],
   trash: [],
-  pinnedNotes: [],
   isLoading: false,
   isEditing: false,
   error: ''
@@ -48,20 +46,18 @@ const NotesProvider = ({ children }) => {
   const addToTrash = (note, noteId) => {
     const filteredNotes = state.notes.filter((note) => note.id !== noteId);
     const filteredArchive = state.archive.filter((note) => note.id !== noteId);
-    const filteredPinnedNotes = state.pinnedNotes.filter((note) => note.id !== noteId);
     const updatedTrash = [...state.trash, note]
 
-    dispatch({ type: "TRASH", payload: { filteredNotes, filteredArchive, updatedTrash, filteredPinnedNotes } })
+    dispatch({ type: "TRASH", payload: { filteredNotes, filteredArchive, updatedTrash, } })
   }
   const restoreFromTrash = (note) => {
     dispatch({ type: "UNTRASH", payload: note })
   }
 
-  const pinNote = (note) => {
-    dispatch({ type: "PIN", payload: note })
-  }
-  const unPinNote = (note) => {
-    dispatch({ type: "UNPIN", payload: note })
+  const pinNote = (noteId) => {
+    dispatch({
+      type: "PIN", payload: noteId
+    })
   }
   const createLabel = (note, text) => {
 
@@ -73,7 +69,6 @@ const NotesProvider = ({ children }) => {
       return note.title.toLowerCase().includes(searchTerm)
     }
     );
-    console.log(filteredNotes)
     dispatch({ type: "SEARCH", payload: { filteredNotes } })
   }
 
@@ -86,8 +81,6 @@ const NotesProvider = ({ children }) => {
     notes: state.notes,
     trash: state.trash,
     archive: state.archive,
-    labels: state.labels,
-    pinnedNotes: state.pinnedNotes,
     isEditing: state.isEditing,
     isLoading: state.isLoading,
     createNote,
@@ -97,7 +90,7 @@ const NotesProvider = ({ children }) => {
     addToTrash,
     restoreFromTrash,
     noteBgColor,
-    pinNote, unPinNote,
+    pinNote,
     createLabel,
     searchNotes
   }
